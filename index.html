@@ -23,6 +23,8 @@
 <p>Current word</p>
 <br>
 <p id = "currentword"></p>
+
+<br><br>
     
 
 
@@ -39,6 +41,8 @@
 
 
 <script type="text/javascript">
+var userwins = 0;
+var userlosses =0;
 
 var wordlist = [
     "battleground",
@@ -56,9 +60,31 @@ var wordlist = [
 
 var randomword = wordlist[Math.floor(Math.random() * wordlist.length)];
 var currentword = document.getElementById("currentword");
-currentword.textContent = randomword;
-console.log(randomword);
+currentword.textContent = makewordalldashes(randomword);
 
+
+function makewordalldashes(wordtobechanged){
+    var newstring ="";
+    for (i =0; i<wordtobechanged.length;i++){
+        newstring = newstring +"_";
+    }
+    return newstring;
+};
+
+
+function diduserpressviablekey(userinput){
+    var alphabetstring = "abcdefghijklmnopqrstuvwxyz";
+    return alphabetstring.includes(userinput);
+}
+
+//this function is run whenever a user presses a key
+document.onkeyup = function(event) {
+ if (diduserpressviablekey){
+     
+ }
+ 
+
+}
 
 </script>
 
