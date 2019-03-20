@@ -62,10 +62,11 @@
 
         var randomword = wordlist[Math.floor(Math.random() * wordlist.length)];
         var currentword = document.getElementById("currentword");
+        var displayedguesses = document.getElementById("guesslist");
         var currentlydispplayedstring = makewordalldashes(randomword);
         currentword.textContent = currentlydispplayedstring;
         var userguesslist = []
-
+        displayedguesses.textContent = userguesslist;
 
 
         function makewordalldashes(wordtobechanged) {
@@ -87,20 +88,11 @@
             console.log();
             for (var i = 0; i < randomword.length; i++) {
                 if (randomword[i] == letterchosen) {
-                    result = result.substring(0, i) + letterchosen + result.substring(i, result.length);
+                    result = result.substring(0, i) + letterchosen + result.substring(i+1, result.length);
                     console.log(result);
                 }
             }
             return result;
-        }
-
-        function addviableguesse(userpick){
-            if (userguesslist.includes(userinput)){
-                return;
-            }
-            else{
-                userguesslist.push(userinput);
-            }
         }
 
         //this function is run whenever a user presses a key
