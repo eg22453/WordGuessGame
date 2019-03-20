@@ -1,5 +1,6 @@
 <!DOCTYPE <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="utf-8">
     <title>WordGuess</title>
@@ -7,108 +8,119 @@
     <link rel="stylesheet" type="text/css" media="screen" href="main.css">
     <script src="main.js"></script>
 </head>
+
 <body>
 
-<h1>Welcome to the Word Guess Game!! Press any key to get started!</h1>
+    <h1>Welcome to the Word Guess Game!! Press any key to get started!</h1>
 
-<br>
-<br>
+    <br>
+    <br>
 
-<p>Wins</p><br>
-<p>"numberofwins"</p>
+    <p>Wins</p><br>
+    <p>"numberofwins"</p>
 
-<br>
-<br>
+    <br>
+    <br>
 
-<p>Current word</p>
-<br>
-<p id = "currentword"></p>
+    <p>Current word</p>
+    <br>
+    <p id="currentword"></p>
 
-<br><br>
-    
-
-
-<p>Number Of Guesses Remaining</p><br>
-<p>display number here</p>
+    <br><br>
 
 
 
-<br>
-
-<p>Letters already guessed</p><br>
-
-<P>display numbers here</P>
+    <p>Number Of Guesses Remaining</p><br>
+    <p>display number here</p>
 
 
-<script type="text/javascript">
-var userwins = 0;
-var userlosses =0;
 
-var wordlist = [
-    "battleground",
-    "monkey",
-    "clarinet",
-    "racecar", 
-    "pokemon", 
-    "pirate", 
-    "nutrition",
-    "starting",
-    "dolphin",
-    "superhero"
-];
+    <br>
+
+    <p>Letters already guessed</p><br>
+
+    <p id = "guesslist"></p>
 
 
-var randomword = wordlist[Math.floor(Math.random() * wordlist.length)];
-var currentword = document.getElementById("currentword");
-currentword.textContent = makewordalldashes(randomword);
-var userguesslist =[]
+    <script type="text/javascript">
+        var userwins = 0;
+        var userlosses = 0;
+
+        var wordlist = [
+            "battleground",
+            "monkey",
+            "clarinet",
+            "racecar",
+            "pokemon",
+            "pirate",
+            "nutrition",
+            "starting",
+            "dolphin",
+            "superhero"
+        ];
 
 
-function makewordalldashes(wordtobechanged){
-    var newstring ="";
-    for (i =0; i<wordtobechanged.length;i++){
-        newstring = newstring +"_";
-    }
-    return newstring;
-};
+        var randomword = wordlist[Math.floor(Math.random() * wordlist.length)];
+        var currentword = document.getElementById("currentword");
+        var currentlydispplayedstring = makewordalldashes(randomword);
+        currentword.textContent = currentlydispplayedstring;
+        var userguesslist = []
 
 
-function diduserpressviablekey(userinput){
-    var alphabetstring = "abcdefghijklmnopqrstuvwxyz";
-    return alphabetstring.includes(userinput);
-}
 
-function replacedasheswithletters(letterchosen){
-    var result;
-    for (var i =0; i <randomword.length;i++){
-        var x;
-              if (randomword[i]=== letterchosen){
-              var updatedstring = currentword.textContent.prototype.substring(0,i) + letterchosen + currentword.textContent.prototype.substring(i,randomword.length); 
-                result = updatedstring;
+        function makewordalldashes(wordtobechanged) {
+            var newstring = "";
+            for (i = 0; i < wordtobechanged.length; i++) {
+                newstring = newstring + "_";
+            }
+            return newstring;
+        };
+
+
+        function diduserpressviablekey(userinput) {
+            var alphabetstring = "abcdefghijklmnopqrstuvwxyz";
+            return alphabetstring.includes(userinput);
+        }
+
+        function replacedasheswithletters(letterchosen) {
+            var result = currentlydispplayedstring;
+            console.log();
+            for (var i = 0; i < randomword.length; i++) {
+                if (randomword[i] == letterchosen) {
+                    result = result.substring(0, i) + letterchosen + result.substring(i, result.length);
+                    console.log(result);
+                }
+            }
+            return result;
+        }
+
+        function addguesses(userpick){
+            if (userguesslist.includes(userpick)){
+                break;
+            }
+            else{
+                userguesslist.push(userpick);
+            }
+        }
+
+        //this function is run whenever a user presses a key
+        document.onkeyup = function (event) {
+            if (diduserpressviablekey(event.key)) {
+                //now we check if the key was a right answer and add it to the guessed word list either way
+                if (randomword.includes(event.key)) {
+                   // console.log("regiestered included event key");
+                    
+                   currentlydispplayedstring = replacedasheswithletters(event.key);
+
+                }
+                console.log(currentlydispplayedstring);
             }
 
-    return result;
-}
 
-//this function is run whenever a user presses a key
-document.onkeyup = function(event) {
- if (diduserpressviablekey(event.key)){
-     //now we check if the key was a right answer and add it to the guessed word list either way
-     console.log(event.key);
-     if (randomword.includes("event.key")){
-         //replace dashes with the event.key
-    //     for (var i =0; i <randomword.length;i++){
-    //           if (randomword[i]=== event.key){
-    //              var updatedstring = 
-    //      }
-    //  }
- }
- 
-
-}
-
-</script>
+        }
+    </script>
 
 
 </body>
+
 </html>
