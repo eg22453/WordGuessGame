@@ -100,6 +100,8 @@
         document.onkeyup = function (event) {
             if (diduserpressviablekey(event.key)) {
                 userguesslist.push(event.key);
+                displayedguesses.textContent = userguesslist.join(' ');
+                
                 console.log(userguesslist);
                 //now we check if the key was a right answer and add it to the guessed word list either way
                 if (randomword.includes(event.key)) {
