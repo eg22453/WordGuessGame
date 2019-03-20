@@ -65,7 +65,7 @@
         var displayedguesses = document.getElementById("guesslist");
         var currentlydispplayedstring = makewordalldashes(randomword);
         currentword.textContent = currentlydispplayedstring;
-        var userguesslist = []
+        var userguesslist = [];
         displayedguesses.textContent = userguesslist;
 
 
@@ -88,6 +88,7 @@
             console.log();
             for (var i = 0; i < randomword.length; i++) {
                 if (randomword[i] == letterchosen) {
+                    //replacing the letter in the displayed string using substring method
                     result = result.substring(0, i) + letterchosen + result.substring(i+1, result.length);
                     console.log(result);
                 }
@@ -109,6 +110,8 @@
                 }
                 console.log(currentlydispplayedstring);
             }
+            //updates the users view of the currentlydisplayedstring
+            currentword.textContent = currentlydispplayedstring;
 
 
         }
