@@ -79,7 +79,7 @@
 
         function diduserpressviablekey(userinput) {
             var alphabetstring = "abcdefghijklmnopqrstuvwxyz";
-            return alphabetstring.includes(userinput);
+            return (alphabetstring.includes(userinput) && !(userguesslist.includes(userinput)));
         }
 
         function replacedasheswithletters(letterchosen) {
@@ -94,18 +94,20 @@
             return result;
         }
 
-        function addguesses(userpick){
-            if (userguesslist.includes(userpick)){
-                break;
+        function addviableguesse(userpick){
+            if (userguesslist.includes(userinput)){
+                return;
             }
             else{
-                userguesslist.push(userpick);
+                userguesslist.push(userinput);
             }
         }
 
         //this function is run whenever a user presses a key
         document.onkeyup = function (event) {
             if (diduserpressviablekey(event.key)) {
+                userguesslist.push(event.key);
+                console.log(userguesslist);
                 //now we check if the key was a right answer and add it to the guessed word list either way
                 if (randomword.includes(event.key)) {
                    // console.log("regiestered included event key");
