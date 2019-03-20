@@ -61,6 +61,7 @@ var wordlist = [
 var randomword = wordlist[Math.floor(Math.random() * wordlist.length)];
 var currentword = document.getElementById("currentword");
 currentword.textContent = makewordalldashes(randomword);
+var userguesslist =[]
 
 
 function makewordalldashes(wordtobechanged){
@@ -77,10 +78,30 @@ function diduserpressviablekey(userinput){
     return alphabetstring.includes(userinput);
 }
 
+function replacedasheswithletters(letterchosen){
+    var result;
+    for (var i =0; i <randomword.length;i++){
+        var x;
+              if (randomword[i]=== letterchosen){
+              var updatedstring = currentword.textContent.prototype.substring(0,i) + letterchosen + currentword.textContent.prototype.substring(i,randomword.length); 
+                result = updatedstring;
+            }
+
+    return result;
+}
+
 //this function is run whenever a user presses a key
 document.onkeyup = function(event) {
- if (diduserpressviablekey){
-     
+ if (diduserpressviablekey(event.key)){
+     //now we check if the key was a right answer and add it to the guessed word list either way
+     console.log(event.key);
+     if (randomword.includes("event.key")){
+         //replace dashes with the event.key
+    //     for (var i =0; i <randomword.length;i++){
+    //           if (randomword[i]=== event.key){
+    //              var updatedstring = 
+    //      }
+    //  }
  }
  
 
