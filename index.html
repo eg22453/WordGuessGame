@@ -31,7 +31,7 @@
 
 
     <p>Number Of Guesses Remaining</p><br>
-    <p>display number here</p>
+    <p id = "userguessesleft"></p>
 
 
 
@@ -64,6 +64,9 @@
         var currentword = document.getElementById("currentword");
         var displayedguesses = document.getElementById("guesslist");
         var currentlydispplayedstring = makewordalldashes(randomword);
+        var userguessesleft = 10;
+        var userguesslinktohtml = document.getElementById("userguessesleft");
+        userguesslinktohtml.textContent = userguessesleft;
         currentword.textContent = currentlydispplayedstring.split('').join(' ');
         var userguesslist = [];
         displayedguesses.textContent = userguesslist;
@@ -100,6 +103,10 @@
         document.onkeyup = function (event) {
             if (diduserpressviablekey(event.key)) {
                 userguesslist.push(event.key);
+                //lower user guess chance
+                userguessesleft--;
+                userguesslinktohtml.textContent = userguessesleft;
+                
                 displayedguesses.textContent = userguesslist.join(' ');
                 
                 console.log(userguesslist);
