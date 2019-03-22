@@ -122,6 +122,15 @@
                    // console.log("regiestered included event key");
                     
                    currentlydispplayedstring = replacedasheswithletters(event.key);
+                   if (currentlydispplayedstring == randomword){
+                       console.log("Word has been correctly guessed!!");
+                       userwins++;
+                       displayeduserwins.textContent = userwins;
+                       randomword = wordlist[Math.floor(Math.random() * wordlist.length)];
+                       currentlydispplayedstring = makewordalldashes(randomword);
+                       userguesslist = [];
+
+                   }
 
                 }
                 else{
