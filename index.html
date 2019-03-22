@@ -17,7 +17,7 @@
     <br>
 
     <p>Wins</p><br>
-    <p id ="userwins"></p>
+    <p id="userwins"></p>
 
     <br>
     <br>
@@ -31,7 +31,7 @@
 
 
     <p>Number Of Guesses Remaining</p><br>
-    <p id = "userguessesleft"></p>
+    <p id="userguessesleft"></p>
 
 
 
@@ -39,7 +39,7 @@
 
     <p>Letters already guessed</p><br>
 
-    <p id = "guesslist"></p>
+    <p id="guesslist"></p>
 
 
     <script type="text/javascript">
@@ -64,7 +64,7 @@
         var currentword = document.getElementById("currentword");
         var displayedguesses = document.getElementById("guesslist");
         var currentlydispplayedstring = makewordalldashes(randomword);
-        var userwins  = 0;
+        var userwins = 0;
         var displayeduserwins = document.getElementById("userwins");
         displayeduserwins.textContent = userwins;
         var userguessesleft = 13;
@@ -84,7 +84,7 @@
         };
 
 
-        function diduserwin(){
+        function diduserwin() {
             var defaultstatus = false;
 
         };
@@ -100,7 +100,7 @@
             for (var i = 0; i < randomword.length; i++) {
                 if (randomword[i] == letterchosen) {
                     //replacing the letter in the displayed string using substring method
-                    result = result.substring(0, i) + letterchosen + result.substring(i+1, result.length);
+                    result = result.substring(0, i) + letterchosen + result.substring(i + 1, result.length);
                     console.log(result);
                 }
             }
@@ -114,36 +114,56 @@
                 // //lower user guess chance
                 // userguessesleft--;
                 // userguesslinktohtml.textContent = userguessesleft;
-                
+
                 // displayedguesses.textContent = userguesslist.join(' ');
-                
+
                 //now we check if the key was a right answer and add it to the guessed word list either way
                 if (randomword.includes(event.key)) {
-                   // console.log("regiestered included event key");
-                    
-                   currentlydispplayedstring = replacedasheswithletters(event.key);
-                   if (currentlydispplayedstring == randomword){
-                       console.log("Word has been correctly guessed!!");
-                       userwins++;
-                       displayeduserwins.textContent = userwins;
-                       randomword = wordlist[Math.floor(Math.random() * wordlist.length)];
-                       currentlydispplayedstring = makewordalldashes(randomword);
-                       userguesslist = [];
+                    // console.log("regiestered included event key");
 
-                   }
+                    currentlydispplayedstring = replacedasheswithletters(event.key);
+                    if (currentlydispplayedstring == randomword) {
+                        console.log("Word has been correctly guessed!!");
+                        userwins++;
+                        displayeduserwins.textContent = userwins;
+                        //generate a new word to play again
+                        randomword = wordlist[Math.floor(Math.random() * wordlist.length)];
+                        currentlydispplayedstring = makewordalldashes(randomword);
+                        //empty prior user guess list
+                        userguesslist = [];
+                        displayedguesses.textContent = userguesslist;
 
-                }
-                else{
+                        //reset userguesses
+                        userguessesleft = 13;
+                        userguesslinktohtml.textContent = userguessesleft;
+
+                    }
+
+                } else {
                     userguesslist.push(event.key);
-                //lower user guess chance
-                userguessesleft--;
-                userguesslinktohtml.textContent = userguessesleft;
-                
-                displayedguesses.textContent = userguesslist.join(' ');
+                    //lower user guess chance
+                    userguessesleft--;
+                    userguesslinktohtml.textContent = userguessesleft;
+                    if (userguessesleft === 0) {
+                        //user loses, play another game
+                        randomword = wordlist[Math.floor(Math.random() * wordlist.length)];
+                        currentlydispplayedstring = makewordalldashes(randomword);
+                        //empty prior user guess list
+                        userguesslist = [];
+                        displayedguesses.textContent = userguesslist;
+                        
+                        //reset userguesses
+                        userguessesleft = 13;
+                        userguesslinktohtml.textContent = userguessesleft;
+
+
+                    }
+
+                    displayedguesses.textContent = userguesslist.join(' ');
 
 
                 }
-                
+
             }
             //updates the users view of the currentlydisplayedstring
             //also uses the split and join methods to add a space between the underscores/letters
