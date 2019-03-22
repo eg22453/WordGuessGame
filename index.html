@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <title>WordGuess</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" media="screen" href="main.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="assets/css/style.css">
     <script src="main.js"></script>
 </head>
 
@@ -14,25 +14,28 @@
     <h1>Welcome to the Word Guess Game!! Press any key to get started!</h1>
 
     <br>
-    <br>
+
+    <div id ="hanghere">
+        <canvas id="myCanvas" width="300" height="600">
+    This is the canvas where the hangman image(s) will be displayed
+    </canvas>
+    </div>
 
     <p>Wins</p><br>
     <p id="userwins"></p>
 
-    <br>
     <br>
 
     <p>Current word</p>
     <br>
     <p id="currentword"></p>
 
-    <br><br>
+    <br>
 
 
 
     <p>Number Of Guesses Remaining</p><br>
     <p id="userguessesleft"></p>
-
 
 
     <br>
@@ -82,13 +85,6 @@
             }
             return newstring;
         };
-
-
-        function diduserwin() {
-            var defaultstatus = false;
-
-        };
-
         function diduserpressviablekey(userinput) {
             var alphabetstring = "abcdefghijklmnopqrstuvwxyz";
             return (alphabetstring.includes(userinput) && !(userguesslist.includes(userinput)));
@@ -110,10 +106,6 @@
         //this function is run whenever a user presses a key
         document.onkeyup = function (event) {
             if (diduserpressviablekey(event.key)) {
-                // userguesslist.push(event.key);
-                // //lower user guess chance
-                // userguessesleft--;
-                // userguesslinktohtml.textContent = userguessesleft;
 
                 // displayedguesses.textContent = userguesslist.join(' ');
 
@@ -171,6 +163,19 @@
 
 
         }
+       
+        
+
+
+        //now to take care of drawing the hangman
+
+        var canvas = document.getElementById("myCanvas");
+
+        //create a drawing object
+        var ctx = canvas.getContext("2d");
+
+        ctx.fillStyle = "#FF0000";
+        ctx.fillRect(0,0,300,500);
     </script>
 
 
