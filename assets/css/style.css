@@ -1,0 +1,30 @@
+h1 {
+    color: darkgoldenrod;
+}
+
+body{
+    color: aliceblue;
+    background-color: black;
+    text-align: center;
+}
+
+p {
+    font-size: 20px;
+    display: inline;
+}
+
+#myCanvas{
+    border:2px solid #c3c3c3;
+    
+}
+
+#hanghere{
+    float:right;
+    margin-right: 10%;
+}
+
+img {
+    float:left;
+
+    display: inline-block;
+}
