@@ -15,10 +15,10 @@
 
     <br>
 
-    <div id ="hanghere">
+    <div id="hanghere">
         <canvas id="myCanvas" width="300" height="600">
-    This is the canvas where the hangman image(s) will be displayed
-    </canvas>
+            This is the canvas where the hangman image(s) will be displayed
+        </canvas>
     </div>
 
     <p>Wins</p><br>
@@ -62,17 +62,27 @@
             "superhero"
         ];
 
-
+        //generate the random word
         var randomword = wordlist[Math.floor(Math.random() * wordlist.length)];
+        //link js to the html page?
         var currentword = document.getElementById("currentword");
+
         var displayedguesses = document.getElementById("guesslist");
+
+        //starts the page by making random word all dashes with function makewordalldashes
         var currentlydispplayedstring = makewordalldashes(randomword);
+
+        //userwins starts at 0 obviously
         var userwins = 0;
         var displayeduserwins = document.getElementById("userwins");
+
+        //displays wins to the user on browser page
         displayeduserwins.textContent = userwins;
         var userguessesleft = 13;
         var userguesslinktohtml = document.getElementById("userguessesleft");
         userguesslinktohtml.textContent = userguessesleft;
+
+        //actually puts text in the html that the user can see
         currentword.textContent = currentlydispplayedstring.split('').join(' ');
         var userguesslist = [];
         displayedguesses.textContent = userguesslist;
@@ -85,6 +95,7 @@
             }
             return newstring;
         };
+
         function diduserpressviablekey(userinput) {
             var alphabetstring = "abcdefghijklmnopqrstuvwxyz";
             return (alphabetstring.includes(userinput) && !(userguesslist.includes(userinput)));
@@ -143,7 +154,7 @@
                         //empty prior user guess list
                         userguesslist = [];
                         displayedguesses.textContent = userguesslist;
-                        
+
                         //reset userguesses
                         userguessesleft = 13;
                         userguesslinktohtml.textContent = userguessesleft;
@@ -162,20 +173,97 @@
             currentword.textContent = currentlydispplayedstring.split('').join(' ');
 
 
+
+
+
+
+
+            //now to take care of drawing the hangman
+
+            var canvas = document.getElementById("myCanvas");
+
+            //create a drawing object
+            var ctx = canvas.getContext("2d");
+            ctx.strokeStyle = "#F0FFFF";
+            ctx.lineWidth = 2;
+
+
+
+            if (userguessesleft === 12) {
+                ctx.moveTo(30, 10);
+                ctx.lineTo(30, 600);
+                ctx.stroke();
+            }
+            if (userguessesleft === 11) {
+                ctx.moveTo(30, 10);
+                ctx.lineTo(280, 10);
+                ctx.stroke();
+            }
+            if (userguessesleft === 10) {
+                ctx.moveTo(150, 10);
+                ctx.lineTo(150, 50);
+                ctx.stroke();
+            }
+
+
+            if (userguessesleft === 9) {
+
+                ctx.beginPath();
+                ctx.arc(150, 100, 45, 0, 2 * Math.PI);
+                ctx.stroke();
+            }
+            if (userguessesleft === 8) {
+                ctx.moveTo(150, 150);
+                ctx.lineTo(150, 400);
+                ctx.stroke();
+            }
+            if (userguessesleft === 7) {
+                ctx.moveTo(150, 400);
+                ctx.lineTo(60, 470);
+                ctx.stroke();
+            }
+            if (userguessesleft === 6) {
+                ctx.moveTo(150, 400);
+                ctx.lineTo(240, 470);
+                ctx.stroke();
+            }
+            if (userguessesleft === 5) {
+                ctx.moveTo(30, 10);
+                ctx.lineTo(280, 10);
+                ctx.stroke();
+            }
+            if (userguessesleft === 4) {
+                ctx.moveTo(30, 10);
+                ctx.lineTo(280, 10);
+                ctx.stroke();
+            }
+            if (userguessesleft === 3) {
+                ctx.moveTo(30, 10);
+                ctx.lineTo(280, 10);
+                ctx.stroke();
+            }
+
+            if (userguessesleft === 2) {
+                ctx.beginPath();
+                ctx.arc(140, 100, 45, 0, 2 * Math.PI);
+                ctx.stroke();
+            }
+            if (userguessesleft === 1) {
+                ctx.moveTo(30, 10);
+                ctx.lineTo(280, 10);
+                ctx.stroke();
+            }
+
+            if (userguessesleft === 0) {
+                ctx.moveTo(30, 10);
+                ctx.lineTo(280, 10);
+                ctx.stroke();
+            }
+
+
+
+
         }
-       
-        
-
-
-        //now to take care of drawing the hangman
-
-        var canvas = document.getElementById("myCanvas");
-
-        //create a drawing object
-        var ctx = canvas.getContext("2d");
-
-        ctx.fillStyle = "#FF0000";
-        ctx.fillRect(0,0,300,500);
     </script>
 
 
