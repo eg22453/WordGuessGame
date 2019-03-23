@@ -1,272 +1,290 @@
 <!DOCTYPE <!DOCTYPE html>
 <html>
-
-<head>
-    <meta charset="utf-8">
+  <head>
+    <meta charset="utf-8" />
     <title>WordGuess</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" media="screen" href="assets/css/style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      media="screen"
+      href="assets/css/style.css"
+    />
     <script src="main.js"></script>
-</head>
+  </head>
 
-<body>
-
+  <body>
     <h1>Welcome to the Word Guess Game!! Press any key to get started!</h1>
 
-    <br>
+    <br />
 
     <div id="hanghere">
-        <canvas id="myCanvas" width="300" height="600">
-            This is the canvas where the hangman image(s) will be displayed
-        </canvas>
+      <canvas id="myCanvas" width="300" height="600">
+        This is the canvas where the hangman image(s) will be displayed
+      </canvas>
     </div>
 
-    <p>Wins</p><br>
+    <p>Wins</p>
+    <br />
     <p id="userwins"></p>
 
-    <br>
+    <br />
 
     <p>Current word</p>
-    <br>
+    <br />
     <p id="currentword"></p>
 
-    <br>
+    <br />
 
-
-
-    <p>Number Of Guesses Remaining</p><br>
+    <p>Number Of Guesses Remaining</p>
+    <br />
     <p id="userguessesleft"></p>
 
+    <br />
 
-    <br>
-
-    <p>Letters already guessed</p><br>
+    <p>Letters already guessed</p>
+    <br />
 
     <p id="guesslist"></p>
 
-
     <script type="text/javascript">
-        var userwins = 0;
-        var userlosses = 0;
+      var userwins = 0;
+      var userlosses = 0;
 
-        var wordlist = [
-            "battleground",
-            "monkey",
-            "clarinet",
-            "racecar",
-            "pokemon",
-            "pirate",
-            "nutrition",
-            "starting",
-            "dolphin",
-            "superhero"
-        ];
+      var wordlist = [
+        "battleground",
+        "monkey",
+        "clarinet",
+        "racecar",
+        "pokemon",
+        "pirate",
+        "nutrition",
+        "starting",
+        "dolphin",
+        "superhero"
+      ];
 
-        //generate the random word
-        var randomword = wordlist[Math.floor(Math.random() * wordlist.length)];
-        //link js to the html page?
-        var currentword = document.getElementById("currentword");
+      //generate the random word
+      var randomword = wordlist[Math.floor(Math.random() * wordlist.length)];
+      //link js to the html page?
+      var currentword = document.getElementById("currentword");
 
-        var displayedguesses = document.getElementById("guesslist");
+      var displayedguesses = document.getElementById("guesslist");
 
-        //starts the page by making random word all dashes with function makewordalldashes
-        var currentlydispplayedstring = makewordalldashes(randomword);
+      //starts the page by making random word all dashes with function makewordalldashes
+      var currentlydispplayedstring = makewordalldashes(randomword);
 
-        //userwins starts at 0 obviously
-        var userwins = 0;
-        var displayeduserwins = document.getElementById("userwins");
+      //userwins starts at 0 obviously
+      var userwins = 0;
+      var displayeduserwins = document.getElementById("userwins");
 
-        //displays wins to the user on browser page
-        displayeduserwins.textContent = userwins;
-        var userguessesleft = 13;
-        var userguesslinktohtml = document.getElementById("userguessesleft");
-        userguesslinktohtml.textContent = userguessesleft;
+      //displays wins to the user on browser page
+      displayeduserwins.textContent = userwins;
+      var userguessesleft = 13;
+      var userguesslinktohtml = document.getElementById("userguessesleft");
+      userguesslinktohtml.textContent = userguessesleft;
 
-        //actually puts text in the html that the user can see
-        currentword.textContent = currentlydispplayedstring.split('').join(' ');
-        var userguesslist = [];
-        displayedguesses.textContent = userguesslist;
+      //actually puts text in the html that the user can see
+      currentword.textContent = currentlydispplayedstring.split("").join(" ");
+      var userguesslist = [];
+      displayedguesses.textContent = userguesslist;
 
-
-        function makewordalldashes(wordtobechanged) {
-            var newstring = "";
-            for (i = 0; i < wordtobechanged.length; i++) {
-                newstring = newstring + "_";
-            }
-            return newstring;
-        };
-
-        function diduserpressviablekey(userinput) {
-            var alphabetstring = "abcdefghijklmnopqrstuvwxyz";
-            return (alphabetstring.includes(userinput) && !(userguesslist.includes(userinput)));
+      function makewordalldashes(wordtobechanged) {
+        var newstring = "";
+        for (i = 0; i < wordtobechanged.length; i++) {
+          newstring = newstring + "_";
         }
+        return newstring;
+      }
 
-        function replacedasheswithletters(letterchosen) {
-            var result = currentlydispplayedstring;
-            console.log();
-            for (var i = 0; i < randomword.length; i++) {
-                if (randomword[i] == letterchosen) {
-                    //replacing the letter in the displayed string using substring method
-                    result = result.substring(0, i) + letterchosen + result.substring(i + 1, result.length);
-                    console.log(result);
-                }
-            }
-            return result;
+      function diduserpressviablekey(userinput) {
+        var alphabetstring = "abcdefghijklmnopqrstuvwxyz";
+        return (
+          alphabetstring.includes(userinput) &&
+          !userguesslist.includes(userinput)
+        );
+      }
+
+      function replacedasheswithletters(letterchosen) {
+        var result = currentlydispplayedstring;
+        console.log();
+        for (var i = 0; i < randomword.length; i++) {
+          if (randomword[i] == letterchosen) {
+            //replacing the letter in the displayed string using substring method
+            result =
+              result.substring(0, i) +
+              letterchosen +
+              result.substring(i + 1, result.length);
+            console.log(result);
+          }
         }
+        return result;
+      }
 
-        //this function is run whenever a user presses a key
-        document.onkeyup = function (event) {
-            if (diduserpressviablekey(event.key)) {
+      //this function is run whenever a user presses a key
+      document.onkeyup = function(event) {
+        if (diduserpressviablekey(event.key)) {
+          // displayedguesses.textContent = userguesslist.join(' ');
 
-                // displayedguesses.textContent = userguesslist.join(' ');
+          //now we check if the key was a right answer and add it to the guessed word list either way
+          if (randomword.includes(event.key)) {
+            // console.log("regiestered included event key");
 
-                //now we check if the key was a right answer and add it to the guessed word list either way
-                if (randomword.includes(event.key)) {
-                    // console.log("regiestered included event key");
+            currentlydispplayedstring = replacedasheswithletters(event.key);
+            if (currentlydispplayedstring == randomword) {
+              userwins++;
+              displayeduserwins.textContent = userwins;
+              //generate a new word to play again
+              randomword =
+                wordlist[Math.floor(Math.random() * wordlist.length)];
+              currentlydispplayedstring = makewordalldashes(randomword);
+              //empty prior user guess list
+              userguesslist = [];
+              displayedguesses.textContent = userguesslist;
 
-                    currentlydispplayedstring = replacedasheswithletters(event.key);
-                    if (currentlydispplayedstring == randomword) {
-                        console.log("Word has been correctly guessed!!");
-                        userwins++;
-                        displayeduserwins.textContent = userwins;
-                        //generate a new word to play again
-                        randomword = wordlist[Math.floor(Math.random() * wordlist.length)];
-                        currentlydispplayedstring = makewordalldashes(randomword);
-                        //empty prior user guess list
-                        userguesslist = [];
-                        displayedguesses.textContent = userguesslist;
-
-                        //reset userguesses
-                        userguessesleft = 13;
-                        userguesslinktohtml.textContent = userguessesleft;
-
-                    }
-
-                } else {
-                    userguesslist.push(event.key);
-                    //lower user guess chance
-                    userguessesleft--;
-                    userguesslinktohtml.textContent = userguessesleft;
-                    if (userguessesleft === 0) {
-                        //user loses, play another game
-                        randomword = wordlist[Math.floor(Math.random() * wordlist.length)];
-                        currentlydispplayedstring = makewordalldashes(randomword);
-                        //empty prior user guess list
-                        userguesslist = [];
-                        displayedguesses.textContent = userguesslist;
-
-                        //reset userguesses
-                        userguessesleft = 13;
-                        userguesslinktohtml.textContent = userguessesleft;
-
-
-                    }
-
-                    displayedguesses.textContent = userguesslist.join(' ');
-
-
-                }
+              //reset userguesses
+              userguessesleft = 13;
+              userguesslinktohtml.textContent = userguessesleft;
 
             }
-            //updates the users view of the currentlydisplayedstring
-            //also uses the split and join methods to add a space between the underscores/letters
-            currentword.textContent = currentlydispplayedstring.split('').join(' ');
-
-
-
-
-
-
-
-            //now to take care of drawing the hangman
-
-            var canvas = document.getElementById("myCanvas");
-
-            //create a drawing object
-            var ctx = canvas.getContext("2d");
-            ctx.strokeStyle = "#F0FFFF";
-            ctx.lineWidth = 2;
-
-
-
-            if (userguessesleft === 12) {
-                ctx.moveTo(30, 10);
-                ctx.lineTo(30, 600);
-                ctx.stroke();
-            }
-            if (userguessesleft === 11) {
-                ctx.moveTo(30, 10);
-                ctx.lineTo(280, 10);
-                ctx.stroke();
-            }
-            if (userguessesleft === 10) {
-                ctx.moveTo(150, 10);
-                ctx.lineTo(150, 50);
-                ctx.stroke();
-            }
-
-
-            if (userguessesleft === 9) {
-
-                ctx.beginPath();
-                ctx.arc(150, 100, 45, 0, 2 * Math.PI);
-                ctx.stroke();
-            }
-            if (userguessesleft === 8) {
-                ctx.moveTo(150, 150);
-                ctx.lineTo(150, 400);
-                ctx.stroke();
-            }
-            if (userguessesleft === 7) {
-                ctx.moveTo(150, 400);
-                ctx.lineTo(60, 470);
-                ctx.stroke();
-            }
-            if (userguessesleft === 6) {
-                ctx.moveTo(150, 400);
-                ctx.lineTo(240, 470);
-                ctx.stroke();
-            }
-            if (userguessesleft === 5) {
-                ctx.moveTo(30, 10);
-                ctx.lineTo(280, 10);
-                ctx.stroke();
-            }
-            if (userguessesleft === 4) {
-                ctx.moveTo(30, 10);
-                ctx.lineTo(280, 10);
-                ctx.stroke();
-            }
-            if (userguessesleft === 3) {
-                ctx.moveTo(30, 10);
-                ctx.lineTo(280, 10);
-                ctx.stroke();
-            }
-
-            if (userguessesleft === 2) {
-                ctx.beginPath();
-                ctx.arc(140, 100, 45, 0, 2 * Math.PI);
-                ctx.stroke();
-            }
-            if (userguessesleft === 1) {
-                ctx.moveTo(30, 10);
-                ctx.lineTo(280, 10);
-                ctx.stroke();
-            }
+          } else {
+            userguesslist.push(event.key);
+            //lower user guess chance
+            userguessesleft--;
+            
+            userguesslinktohtml.textContent = userguessesleft;
 
             if (userguessesleft === 0) {
-                ctx.moveTo(30, 10);
-                ctx.lineTo(280, 10);
-                ctx.stroke();
+            
+              //user loses, play another game
+              randomword =
+                wordlist[Math.floor(Math.random() * wordlist.length)];
+              currentlydispplayedstring = makewordalldashes(randomword);
+              //empty prior user guess list
+              userguesslist = [];
+              displayedguesses.textContent = userguesslist;
+
+              //reset userguesses
+              userguessesleft = 13;
+              userguesslinktohtml.textContent = userguessesleft;
             }
 
-
-
-
+            displayedguesses.textContent = userguesslist.join(" ");
+          }
         }
+        //updates the users view of the currentlydisplayedstring
+        //also uses the split and join methods to add a space between the underscores/letters
+        currentword.textContent = currentlydispplayedstring.split("").join(" ");
+
+        //now to take care of drawing the hangman
+
+        var canvas = document.getElementById("myCanvas");
+
+        //create a drawing object
+        var ctx = canvas.getContext("2d");
+        ctx.strokeStyle = "#F0FFFF";
+        ctx.lineWidth = 2;
+
+        if (userguessesleft === 13) {
+            ctx.clearRect(0, 0, canvas.width, canvas.height); 
+        }
+
+        if (userguessesleft === 12) {
+            ctx.beginPath();
+          ctx.moveTo(30, 10);
+          ctx.lineTo(30, 600);
+          ctx.stroke();
+          ctx.closePath();
+        }
+        if (userguessesleft === 11) {
+            ctx.beginPath();
+          ctx.moveTo(30, 10);
+          ctx.lineTo(280, 10);
+          ctx.stroke();
+          ctx.closePath();
+        }
+        if (userguessesleft === 10) {
+            ctx.beginPath();
+          ctx.moveTo(150, 10);
+          ctx.lineTo(150, 50);
+          ctx.stroke();
+          ctx.closePath();
+        }
+
+        if (userguessesleft === 9) {
+            ctx.beginPath();
+          ctx.beginPath();
+          ctx.arc(150, 100, 45, 0, 2 * Math.PI);
+          ctx.stroke();
+          ctx.closePath();
+        }
+        if (userguessesleft === 8) {
+          ctx.moveTo(150, 150);
+          ctx.lineTo(150, 400);
+          ctx.stroke();
+          ctx.closePath();
+        }
+        if (userguessesleft === 7) {
+            ctx.beginPath();
+          ctx.moveTo(150, 400);
+          ctx.lineTo(60, 470);
+          ctx.stroke();
+          ctx.closePath();
+        }
+        if (userguessesleft === 6) {
+            ctx.beginPath();
+          ctx.moveTo(150, 400);
+          ctx.lineTo(240, 470);
+          ctx.stroke();
+          ctx.closePath();
+        }
+        if (userguessesleft === 5) {
+            ctx.beginPath();
+          ctx.moveTo(150, 200);
+          ctx.lineTo(100, 150);
+          ctx.stroke();
+          ctx.closePath();
+        }
+        if (userguessesleft === 4) {
+            ctx.beginPath();
+          ctx.moveTo(150, 200);
+          ctx.lineTo(200, 150);
+          ctx.stroke();
+          ctx.closePath();
+        }
+        if (userguessesleft === 3) {
+            ctx.beginPath();
+          ctx.moveTo(150, 80);
+          ctx.lineTo(160, 85);
+          ctx.stroke();
+          ctx.moveTo(160, 80);
+          ctx.lineTo(150, 85);
+          ctx.stroke();
+          ctx.closePath();
+        }
+
+        if (userguessesleft === 2) {
+            ctx.beginPath();
+          ctx.moveTo(130, 80);
+          ctx.lineTo(140, 85);
+          ctx.stroke();
+          ctx.moveTo(140, 80);
+          ctx.lineTo(130, 85);
+          ctx.stroke();
+          ctx.closePath();
+        }
+        if (userguessesleft === 1) {
+          ctx.beginPath();
+          ctx.arc(145, 110, 15, 0, 2 * Math.PI);
+          ctx.stroke();
+          ctx.closePath();
+        }
+
+        if (userguessesleft === 0) {
+            ctx.clearRect(0, 0, canvas.width, canvas.height); 
+          
+        }
+      };
     </script>
-
-
-</body>
-
+  </body>
 </html>
