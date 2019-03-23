@@ -10,6 +10,7 @@ body{
 
 p {
     font-size: 20px;
+    display: inline;
 }
 
 #myCanvas{
@@ -20,4 +21,10 @@ p {
 #hanghere{
     float:right;
     margin-right: 10%;
+}
+
+img {
+    float:left;
+
+    display: inline-block;
 }
